@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "node server-local.js",
-    "build": "netlify-lambda build functions"
+    "build": "netlify-lambda build express"
   },
   "repository": {
     "type": "git",
