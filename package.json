@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "functions/server.js",
-  "dependencies": {},
+  "dependencies": {
+    "netlify-lambda": "^2.0.1"
+  },
   "devDependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -11,7 +13,8 @@
     "serverless-http": "^2.6.0"
   },
   "scripts": {
-    "start": "node server-local.js"
+    "start": "node server-local.js",
+    "build": "netlify-lambda build functions"
   },
   "repository": {
     "type": "git",
