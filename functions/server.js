@@ -1,33 +1,26 @@
 const express = require("express");
-
-const app = express();
-const PORT = process.env.PORT || 8085;
-
+const serverless = require("serverless-http");
+const bodyParser = require("body-parser");
 const cors = require("cors");
-
-app.use(express.json());
-
-// Simple use of CORS that enables ALL requests. Yikes!
-app.use(cors());
-
 const ballots = require("./ballots.json");
 
-app.get("/api/ballots", function(req, res) {
-  console.log("SENT ALL BALLOTS");
+const app = express();
+
+const router = express.Router();
+
+router.get("/ballots", (req, res) => {
   res.json(ballots);
 });
 
-app.get("/api/ballots/:id", function(req, res) {
+router.get("/ballots/:id", (req, res) => {
   const ballotId = req.params.id;
 
   const ballot = ballots.find((ballot) => ballot.id === ballotId);
 
-  console.log("SENT BALLOT");
-
   res.json(ballot);
 });
 
-app.put("/api/ballots/:id", function(req, res) {
+router.post("/ballots/:id", function (req, res) {
   const ballotId = req.params.id;
 
   const ballotIndex = ballots.findIndex((ballot) => ballot.id === ballotId);
@@ -48,6 +41,9 @@ app.put("/api/ballots/:id", function(req, res) {
   }
 });
 
-app.listen(PORT, function() {
-  console.log("Sever is listening at http://localhost:" + PORT);
-});
+app.use(cors());
+app.use(bodyParser.json());
+app.use("/api", router);
+
+module.exports = app;
+module.exports.handler = serverless(app);
