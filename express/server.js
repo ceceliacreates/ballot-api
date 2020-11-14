@@ -43,7 +43,7 @@ router.post("/ballots/:id", function (req, res) {
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/api", router);
+app.use("/.netlify/functions/server", router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
