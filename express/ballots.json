@@ -7,7 +7,6 @@
     "issueId": "1",
     "issueDescription": "Signature verification needed",
     "issueResolutionFile": null,
-    "issueResolutionMessage": null,
     "pin": "7777"
   },
   {
@@ -18,7 +17,6 @@
     "issueId": "2",
     "issueDescription": "Address verification needed",
     "issueResolutionFile": null,
-    "issueResolutionMessage": null,
     "pin": "8888"
   },
   {
@@ -29,7 +27,6 @@
     "issueId": "3",
     "issueDescription": "Identify verification needed",
     "issueResolutionFile": null,
-    "issueResolutionMessage": null,
     "pin": "9999"
   }
 ]
