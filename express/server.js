@@ -1,7 +1,6 @@
 const express = require("express");
 const serverless = require("serverless-http");
 const bodyParser = require("body-parser");
-//const cors = require("cors");
 const ballots = require("./ballots.json");
 
 const app = express();
@@ -41,7 +40,6 @@ router.post("/ballots/:id", function (req, res) {
   }
 });
 
-//app.use(cors());
 app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router);
 
