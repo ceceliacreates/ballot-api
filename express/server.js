@@ -29,13 +29,10 @@ router.get("/ballots/:id", (req, res) => {
 // POST route to set the issueResolutionFile value to the uploaded file
 router.post("/ballots/:id", upload.any(), function (req, res) {
   const ballotId = req.params.id;
-
   const ballotIndex = ballots.findIndex((ballot) => ballot.id === ballotId);
-
   const ballotToUpdate = ballots[ballotIndex];
-
-  if (req.file) {
-    ballotToUpdate.issueResolutionFile = req.file;
+  if (req.body) {
+    ballotToUpdate.issueResolutionFile = req.body;
     res.json(ballotToUpdate);
   } else {
     const error = {
