@@ -1,6 +1,7 @@
 const express = require("express");
 const serverless = require("serverless-http");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 // middleware to handle the file upload
 const multer = require("multer");
@@ -20,22 +21,17 @@ router.get("/ballots", (req, res) => {
 // GET route to return a single ballot for given ballot ID
 router.get("/ballots/:id", (req, res) => {
   const ballotId = req.params.id;
-
   const ballot = ballots.find((ballot) => ballot.id === ballotId);
-
   res.json(ballot);
 });
 
 // POST route to set the issueResolutionFile value to the uploaded file
 router.post("/ballots/:id", upload.any(), function (req, res) {
   const ballotId = req.params.id;
-
   const ballotIndex = ballots.findIndex((ballot) => ballot.id === ballotId);
-
   const ballotToUpdate = ballots[ballotIndex];
-
-  if (req.file) {
-    ballotToUpdate.issueResolutionFile = req.file;
+  if (req.body) {
+    ballotToUpdate.issueResolutionFile = req.body;
     res.json(ballotToUpdate);
   } else {
     const error = {
@@ -44,6 +40,9 @@ router.post("/ballots/:id", upload.any(), function (req, res) {
     res.json(error);
   }
 });
+
+// Simple CORS enabled in this branch
+app.use(cors());
 
 // Configuration for Netlify Function
 app.use(bodyParser.json());
